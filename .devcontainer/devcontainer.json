@@ -1,0 +1,35 @@
+{
+  "name": "laravel-7-demos-dev-container",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/var/www/html",
+  "runArgs": [
+    "--cpus=1",
+    "--memory=2g",
+    "--dns=8.8.8.8",  // 添加备用DNS
+    "--dns=114.114.114.114",
+    "--add-host=host.docker.internal:host-gateway"
+  ],
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+      },
+      "extensions": [
+        "felixfbecker.php-debug",
+        "bmewburn.vscode-intelephense-client",
+        "xdebug.php-debug"
+      ]
+    }
+  },
+  "forwardPorts": [
+    8000,
+    3306,
+    6379
+  ],
+  "containerEnv": {
+    "HTTP_PROXY": "http://host.docker.internal:7890",
+    "HTTPS_PROXY": "http://host.docker.internal:7890",
+    "ALL_PROXY": "socks5://host.docker.internal:7890"
+  }
+}
